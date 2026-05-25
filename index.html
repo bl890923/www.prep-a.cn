@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREP-A阶点国际学校 | 中美国际教育先行者</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #264e9a;
+            --secondary-color: #2c6bc0;
+            --accent-color: #f5b120;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --gray-color: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 顶部导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 108px;
+            height: 36px;
+        }
+
+        .logo-text {
+            margin-left: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Banner轮播区域 */
+        .banner-section {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            margin-top: 66px;
+            overflow: hidden;
+        }
+
+        .banner-slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+        }
+
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .banner-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .banner-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .banner-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .banner-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        .banner-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .banner-arrow.prev {
+            left: 20px;
+        }
+
+        .banner-arrow.next {
+            right: 20px;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        /* 学校介绍板块 */
+        .intro-section {
+            background-color: var(--light-color);
+            padding: 80px 0;
+        }
+
+        .intro-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .intro-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .intro-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            margin-bottom: 15px;
+            color: var(--gray-color);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .advantage-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .advantage-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .advantage-card h4 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* 学部介绍 */
+        .department-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .department-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            padding: 40px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(38, 78, 154, 0.2);
+        }
+
+        .department-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .department-card p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .department-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-item i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* 课程设置 */
+        .courses-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .courses-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 50px;
+        }
+
+        .courses-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .courses-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .courses-list {
+            flex: 1;
+        }
+
+        .course-type {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .course-type h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .advantages-list {
+            list-style-type: none;
+            margin-top: 40px;
+        }
+
+        .advantages-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .advantages-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* 连读项目 */
+        .program-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .program-highlight {
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .program-highlight h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .program-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .program-item {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .program-item strong {
+            color: var(--primary-color);
+        }
+
+        /* 升学指导 */
+        .guidance-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .guidance-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .guidance-text {
+            flex: 1;
+        }
+
+        .guidance-features {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-box i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* 入学流程 */
+        .admission-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .admission-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .admission-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admission-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .admission-steps {
+            flex: 1;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-text h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        /* 校园开放日 */
+        .open-day-section {
+            padding: 80px 0;
+            background: linear-gradient(rgba(38, 78, 154, 0.9), rgba(38, 78, 154, 0.9)), url('https://img8.dfco.cn/prep-a/rxfy02.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .open-day-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .open-day-info {
+            flex: 1;
+        }
+
+        .open-day-img {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .open-day-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .schedule-list {
+            list-style-type: none;
+            margin-top: 20px;
+        }
+
+        .schedule-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 新闻资讯 */
+        .news-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .news-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .news-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-img {
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .news-content a {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .news-content a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #1a3a7a;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-col ul {
+            list-style-type: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* 二级页面样式 */
+        .secondary-page {
+            padding: 100px 0 80px;
+        }
+
+        .page-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-top: 66px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .gpa-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .gpa-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+        }
+
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .course-table th, .course-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .course-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        .course-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .gpa-system {
+            background-color: #f0f7ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .advantages-grid,
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .intro-content,
+            .courses-content,
+            .guidance-content,
+            .admission-content,
+            .open-day-content {
+                flex-direction: column;
+            }
+            
+            .department-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .guidance-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 66px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .advantages-grid,
+            .news-grid,
+            .footer-content,
+            .guidance-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .open-day-img {
+                grid-template-columns: 1fr;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .banner-section {
+                height: 400px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 主页面 -->
+    <div id="home-page">
+        <!-- 顶部导航栏 -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">
+                    <img src="https://img8.dfco.cn/prep-a/logo.png" alt="PREP-A阶点国际学校">
+                    <div class="logo-text">PREP-A阶点国际学校</div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav>
+                    <ul id="mainNav">
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#about">学校介绍</a></li>
+                        <li><a href="#department">学部介绍</a></li>
+                        <li><a href="#courses">课程设置</a></li>
+                        <li><a href="#program">连读项目</a></li>
+                        <li><a href="#admission">入学流程</a></li>
+                        <li><a href="gpa.html" target="_blank">GPA课程</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Banner轮播 -->
+        <section class="banner-section">
+            <div class="banner-slider" id="bannerSlider">
+                <div class="banner-slide active">
+                    <img src="https://img8.dfco.cn/prep-a/banner01.png" alt="阶点国际学校">
+                    <div class="banner-content">
+                        <h1>PREP-A阶点国际学校</h1>
+                        <p>格物致知、睿思进取 | 中学为体、西学为用 | 培养具有中国底蕴的世界公民</p>
+                    </div>
+                </div>
+                <div class="banner-slide">
+                    <div style="background: linear-gradient(rgba(38, 78, 154, 0.8), rgba(44, 107, 192, 0.8)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div class="banner-content">
+                            <h1>中美高中大学2+2+2连读项目</h1>
+                            <p>一站式留学服务，直通美国名校，提前1-2年获得学士学位</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-slide">
+                    <div style="background: linear-gradient(rgba(245, 177, 32, 0.8), rgba(255, 193, 7, 0.8)); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div class="banner-content">
+                            <h1>2023年校园开放日预约中</h1>
+                            <p>7月30日 9:00-15:00 | 体验外教课堂，参观校园设施，了解招生政策</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="banner-arrow prev" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="banner-arrow next" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="banner-nav" id="bannerNav">
+                <div class="banner-dot active"></div>
+                <div class="banner-dot"></div>
+                <div class="banner-dot"></div>
+            </div>
+        </section>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 学校介绍 -->
+            <section id="about" class="intro-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>上海阶点国际学校</h2>
+                    </div>
+                    
+                    <div class="intro-content fade-in">
+                        <div class="intro-img">
+                            <img src="https://img8.dfco.cn/prep-a/about01.png" alt="阶点国际学校">
+                        </div>
+                        <div class="intro-text">
+                            <h3>格物致知、睿思进取</h3>
+                            <p>上海阶点国际学校是一家专业从事中美国际教育的高中。理念是"格物致知、睿思进取"，方针是"中学为体、西学为用"，致力于培养具有中国底蕴的世界公民。</p>
+                            <p>目前，阶点国际学校落户上海，同时与国外多所高中与大学院校建立了深度的合作关系。阶点国际学校已经在美国纽约、阿肯色州等地设立教育中心为国内及赴海外的学生提供留学服务。</p>
+                            <p>学校拥有卓越的管理团队，优秀的教师队伍，优质的教育资源，先进的教学理念，以及多维度的教育模式。始终践行教书育人的核心价值观，做中美国际教育的先行者，为赴美留学生提供专业的一站式解决方案。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="advantages-grid fade-in">
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>办学优势</h4>
+                            <p>阶点国际学校是美国Grace Academy在中国的授权学校，美式GPA学分修读标准，中美学分互认，为学生今后升学之路搭建了更广的平台。</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h4>教学优势</h4>
+                            <p>国家课程国际化，国际课程校本化，学生辅导个性化，学生评价多元化。以美式GPA学分评价为主线，注重学生全面发展。</p>
+                        </div>
+                        
+                        <div class="advantage-card">
+                            <div class="advantage-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>师资优势</h4>
+                            <p>外教老师都来自以英语为母语的国家，拥有多年国际学校教学经验；中文老师都具有深厚的中国底蕴、丰富的教学经验和留学背景。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学部介绍 -->
+            <section id="department" class="department-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>学部介绍</h2>
+                    </div>
+                    
+                    <div class="department-card fade-in">
+                        <h3>高中部</h3>
+                        <p>阶点国际国际学校高中阶段，在"中学为体、西学为用"办学方针的指导下，以培养"具有中国底蕴的世界公民"为目标，以国家课程标准要求的课程为主体，同时引入美国格瑞斯学校优质课程，以此打开学生的国际视野，提升学生的综合素养。</p>
+                        
+                        <div class="department-details">
+                            <div class="detail-item">
+                                <i class="fas fa-user-graduate"></i>
+                                <div><strong>招生对象：</strong>年满十六周岁</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div><strong>入学时间：</strong>9月</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clipboard-check"></i>
+                                <div><strong>录取方式：</strong>笔试+面试</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div><strong>学校地点：</strong>上海阶点国际学校</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 课程设置 -->
+            <section id="courses" class="courses-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>课程设置</h2>
+                    </div>
+                    
+                    <div class="courses-content fade-in">
+                        <div class="courses-img">
+                            <img src="https://img8.dfco.cn/prep-a/kcsz01.png" alt="课程设置">
+                        </div>
+                        
+                        <div class="courses-list">
+                            <div class="course-type">
+                                <h4>国标课程</h4>
+                                <p>国家课程标准要求的语文、数学、英语。其中语文、数学为中文授课。</p>
+                            </div>
+                            
+                            <div class="course-type">
+                                <h4>国际课程</h4>
+                                <p>美国学校优质的英语、音乐、美术、体育课程合作办学引入，全英文授课。依据学段的增长，将加大这部分课程。</p>
+                            </div>
+                            
+                            <div class="course-type">
+                                <h4>创新课程</h4>
+                                <p>将国家课程的部分课程与格瑞斯学校部分课程以主题形式整合为研究性学习课，以双语形式授课。</p>
+                            </div>
+                            
+                            <div class="course-type">
+                                <h4>素质课程</h4>
+                                <p>丰富多彩的体育、艺术、科技、实践体验等活动课。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in">
+                        <h3 style="color: var(--primary-color); margin: 40px 0 20px; text-align: center;">课程优势</h3>
+                        
+                        <ul class="advantages-list">
+                            <li>学生在学期末通过考试顺利拿到美国合作高中认证的毕业证书。凭借学校结业证和成绩单，学生可以申请海外多国家大学；</li>
+                            <li>美国合作高中学校定期监督国内教学质量；</li>
+                            <li>完善的培养体系使学生在校即可完成语言学习，攻克托福，SSAT(美国中考)；</li>
+                            <li>重视中国传统文化，开设语文(国学、写字)、数学课程，并开设独具特色的艺术类课程，使中西方意识形态得到完美的结合；</li>
+                            <li>全日制小班教学，学生可以在课堂上获得老师更多的关注；</li>
+                            <li>丰富的社会实践、社团活动、俱乐部生活，培养学生交流沟通的自信力。冬夏季美国深入游学活动，交换生等项目拓展国际视野；</li>
+                            <li>为了确保高质量教学，我们为所有年级的学生都提供入学考试；</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 中美高中大学2+2+2连读国际班 -->
+            <section id="program" class="program-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>中美高中大学2+2+2连读国际班</h2>
+                    </div>
+                    
+                    <div class="fade-in">
+                        <p>2+2+2项目由阶点国际学校与美国合作格瑞斯学校共同联合承担教学工作，是依托美国高中与当地大学得天独厚的优质教育资源而打造的优质国际教育项目。2+2+2本科快捷通道是面向中国学生提供的真正可以享受美国教育福利和简单快捷进入世界名校的独特本科快捷课程。</p>
+                        
+                        <div class="program-highlight">
+                            <h4>项目亮点</h4>
+                            <p>与以往美国大学"语言+本科"双录取式大学预科课程不同，此项目学生在高二毕业后，即可赴美就读大一大二，同时完成一部分美国高中学分，并获得美国高中毕业证和副学士学位。完成美国大学前两年基础课程后即可进行转升学，完成大三大四学业，获取学士学位。</p>
+                        </div>
+                        
+                        <div class="program-details">
+                            <div class="program-item">
+                                <strong>招生对象：</strong>初中毕业或高中一年级在读学生，具备英语基础能力，有出国留学意向，全国招生，不限户籍。
+                            </div>
+                            <div class="program-item">
+                                <strong>录取条件：</strong>笔试+面试；认同学校办学理念，身心健康，品行端正，学业优良，英语综合能力强，有较强的自主学习能力和发展潜力的学生。
+                            </div>
+                            <div class="program-item">
+                                <strong>录取方式：</strong>参加格瑞思国际高中学校组织的国际课程自主招生考试，科目包括：英语，数学和理化(全英文试卷)，并达到学校的录取要求。
+                            </div>
+                            <div class="program-item">
+                                <strong>入学时间：</strong>9月。
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in" style="margin-top: 50px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 20px; text-align: center;">课程优势</h3>
+                        
+                        <div class="program-details">
+                            <div class="program-item">有准备：在国内提供3年制中美高中大学连读课程，为赴美留学做好充分准备；</div>
+                            <div class="program-item">保录取：在国内可获得美国优秀大学双录取；</div>
+                            <div class="program-item">省时间：学生16岁，最早高中二年级结束即可赴美读大学，4年时间可以拿到美国本科学士学位。节省1-2年时间；</div>
+                            <div class="program-item">易升学：获得美国高中毕业证和美国大一、大二学分，顺利升入美国名校读大三；</div>
+                            <div class="program-item">信誉高：与公立大学合作，所有学校均得到中国教育部认可；</div>
+                            <div class="program-item">免考试：免托福、SAT考试，凭在校ESL成绩和在校GPA成绩直接申请；</div>
+                            <div class="program-item">易签证：个性化签证辅导，顺利通过签证；</div>
+                            <div class="program-item">适应快：引进美国原版教材和学生评价方法，让学生尽快适应美国生活；</div>
+                            <div class="program-item">保衔接：国内高中、美国社区大学、美国四年制大学无缝对接；</div>
+                            <div class="program-item">出口宽：根据大一、大二GPA成绩，大三可申请转入全美任何一种四年制大学；</div>
+                            <div class="program-item">费用低：在美全部总费用80-100万人民币，至少节省30-40万人民币。</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 阶点升学指导中心 -->
+            <section class="guidance-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>阶点升学指导中心</h2>
+                    </div>
+                    
+                    <div class="guidance-content fade-in">
+                        <div class="guidance-text">
+                            <p>阶点国际学校升学指导中心，阶点国际高中的核心组成部分。升学指导中心旨在为阶点高中的学生和其他有留美需求的学生提供一站式全面优质的留学服务。</p>
+                            <p>服务包括中美游学、留学规划、美国院校和签证申请、住宿接机安排，以及完善的海外后续服务。比如，生活关怀、学业指导、转升学指导等。</p>
+                            <p>阶点升学指导中心的开创模式，弥补了教学和留学规划脱节，学生实践与申请脱节，海外后续服务缺失等现象。打造了具有丰富留学申请和海外指导经验的中美专家团队，帮助所有参与的学生实现他们的"留学梦"并且"成功留学"。</p>
+                        </div>
+                        
+                        <div class="guidance-features">
+                            <div class="feature-box">
+                                <i class="fas fa-plane"></i>
+                                <h5>中美游学</h5>
+                            </div>
+                            <div class="feature-box">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h5>留学规划</h5>
+                            </div>
+                            <div class="feature-box">
+                                <i class="fas fa-university"></i>
+                                <h5>院校申请</h5>
+                            </div>
+                            <div class="feature-box">
+                                <i class="fas fa-hands-helping"></i>
+                                <h5>海外服务</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 如何进入阶点国际学校 -->
+            <section id="admission" class="admission-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>如何进入阶点国际学校</h2>
+                    </div>
+                    
+                    <div class="admission-content fade-in">
+                        <div class="admission-img">
+                            <img src="https://img8.dfco.cn/prep-a/rxfy01.png" alt="入学流程">
+                        </div>
+                        
+                        <div class="admission-steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">
+                                    <h4>招收对象</h4>
+                                    <p>初三毕业生及高中，16-18周岁中、外籍学生；同时，招生各年级少量插班生。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">
+                                    <h4>申请流程</h4>
+                                    <p>电话咨询→来校考察→申请入学→入学测试→审核录取→准备入学。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">
+                                    <h4>入学测试</h4>
+                                    <p>笔试、面试；希望家长及学生在全面了解格瑞思后，进行入学测试。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">
+                                    <h4>咨询电话</h4>
+                                    <p>400-601-6869</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 校园开放日 -->
+            <section class="open-day-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2 style="color: white;">阶点国际学校7月最后一场说明会</h2>
+                    </div>
+                    
+                    <div class="open-day-content fade-in">
+                        <div class="open-day-info">
+                            <h3>上海阶点国际学校校园开放日活动</h3>
+                            <p>即日起开始接受预约报名！</p>
+                            
+                            <ul class="schedule-list">
+                                <li><strong>活动时间：</strong>2023年7月30日 9：00—15：00</li>
+                                <li><strong>活动地点：</strong>上海阶点国际学校</li>
+                                <li><strong>招生对象：</strong>高中</li>
+                                <li><strong>方向：</strong>美国方向</li>
+                                <li><strong>预约电话：</strong>400-601-6869</li>
+                            </ul>
+                            
+                            <h4 style="margin-top: 25px;">活动流程</h4>
+                            <ul class="schedule-list">
+                                <li><strong>讲座类（9：00-10：00）：</strong>学校介绍、外方学监发言、校长发言等</li>
+                                <li><strong>参观类（10：00-12：00）：</strong>篮球场、操场、礼堂、各类教室等</li>
+                                <li><strong>体验类（10：00-12：00）：</strong>外教口语、STEM、科学课、舞蹈、美术等</li>
+                                <li><strong>测试与校长面试（13：00-15：00）</strong></li>
+                                <li><strong>公布成绩，学位申请（15：30）</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="open-day-img">
+                            <img src="https://img8.dfco.cn/prep-a/rxfy02.png" alt="开放日活动">
+                            <img src="https://img8.dfco.cn/prep-a/rxfy03.png" alt="校园环境">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 新闻资讯 -->
+            <section class="news-section">
+                <div class="container">
+                    <div class="section-title fade-in">
+                        <h2>新闻资讯</h2>
+                    </div>
+                    
+                    <div class="news-grid fade-in">
+                        <div class="news-item">
+                            <div class="news-img" style="background-image: url('https://img8.dfco.cn/prep-a/about01.png');"></div>
+                            <div class="news-content">
+                                <h4>用心奉献，用爱陪伴，共同感悟成长的温度</h4>
+                                <p>阶点国际学校注重师生关系建设，营造温馨校园氛围，让每一位学生都能感受到家一般的温暖...</p>
+                                <a href="#">阅读更多 →</a>
+                            </div>
+                        </div>
+                        
+                        <div class="news-item">
+                            <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');"></div>
+                            <div class="news-content">
+                                <h4>精彩课堂 | 学英语到底有多少种方式？看阶点国际学</h4>
+                                <p>从戏剧表演到科学实验，从辩论赛到模拟联合国，阶点国际学校创新的英语教学方式让语言学习变得生动有趣...</p>
+                                <a href="#">阅读更多 →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-col">
+                        <h4>PREP-A阶点国际学校</h4>
+                        <p>致力于培养具有中国底蕴的世界公民，做中美国际教育的先行者。</p>
+                        <div class="contact-info">
+                            <p><i class="fas fa-map-marker-alt"></i> 上海阶点国际学校</p>
+                            <p><i class="fas fa-phone"></i> 400-601-6869</p>
+                            <p><i class="fas fa-envelope"></i> info@prep-a.edu.cn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>快速链接</h4>
+                        <ul>
+                            <li><a href="#home">首页</a></li>
+                            <li><a href="#about">学校介绍</a></li>
+                            <li><a href="#department">学部介绍</a></li>
+                            <li><a href="#courses">课程设置</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>项目介绍</h4>
+                        <ul>
+                            <li><a href="#program">2+2+2连读项目</a></li>
+                            <li><a href="#admission">入学流程</a></li>
+                            <li><a href="gpa.html" target="_blank">GPA课程</a></li>
+                            <li><a href="#">升学指导</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-col">
+                        <h4>关注我们</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-weixin"></i> 微信公众号</a></li>
+                            <li><a href="#"><i class="fab fa-weibo"></i> 新浪微博</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>© 2023 PREP-A阶点国际学校 版权所有 | 沪ICP备12345678号</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 二级页面内容（GPA课程介绍） -->
+    <div id="gpa-page" style="display: none;">
+        <!-- 二级页面单独作为一个完整的HTML页面，这里为了演示只展示结构 -->
+    </div>
+
+    <script>
+        // Banner轮播功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // Banner轮播逻辑
+            const slides = document.querySelectorAll('.banner-slide');
+            const dots = document.querySelectorAll('.banner-dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const bannerSlider = document.getElementById('bannerSlider');
+            let currentSlide = 0;
+            let slideInterval;
+            
+            // 初始化轮播
+            function initSlider() {
+                if (slides.length === 0) return;
+                
+                // 设置第一张幻灯片为活动状态
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+                
+                // 自动轮播
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // 下一张幻灯片
+            function nextSlide() {
+                goToSlide((currentSlide + 1) % slides.length);
+            }
+            
+            // 上一张幻灯片
+            function prevSlide() {
+                goToSlide((currentSlide - 1 + slides.length) % slides.length);
+            }
+            
+            // 跳转到指定幻灯片
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                currentSlide = n;
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+            
+            // 事件监听
+            if (prevBtn) prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+            
+            if (nextBtn) nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+            
+            // 点指示器点击事件
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetInterval();
+                });
+            });
+            
+            // 重置自动轮播间隔
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // 初始化
+            initSlider();
+            
+            // 移动端菜单切换
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.backgroundColor = 'rgba(38, 78, 154, 0.95)';
+                } else {
+                    header.style.backgroundColor = 'var(--primary-color)';
+                }
+            });
+            
+            // 滚动动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkScroll() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // 初始检查
+            checkScroll();
+            
+            // 滚动时检查
+            window.addEventListener('scroll', checkScroll);
+            
+            // Banner尺寸自适应
+            function adjustBannerHeight() {
+                const bannerSection = document.querySelector('.banner-section');
+                if (!bannerSection) return;
+                
+                // 根据宽度等比例调整高度 (1920:520的比例)
+                const width = window.innerWidth;
+                const height = (width * 520) / 1920;
+                
+                // 设置最小和最大高度
+                const minHeight = 300;
+                const maxHeight = 600;
+                
+                let finalHeight = Math.max(minHeight, Math.min(height, maxHeight));
+                bannerSection.style.height = finalHeight + 'px';
+            }
+            
+            // 初始调整
+            adjustBannerHeight();
+            
+            // 窗口大小变化时调整
+            window.addEventListener('resize', adjustBannerHeight);
+            
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // 关闭移动端菜单
+                        if (mainNav) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
